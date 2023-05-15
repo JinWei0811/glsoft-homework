@@ -1,0 +1,43 @@
+<div class="calculator">
+    <div class="calculator-top">
+        <input type="text" class="calculator-screen" [(ngModel)]="result" disabled />
+    </div>
+    <div class="calculator-buttons">
+
+        <span class="block-span block-1"></span>
+        <span class="block-span block-2"></span>
+        <span class="block-span block-3"></span>
+        <button (click)="onOperatorButtonClick('%')" type="button" class="operator-percent function-button">%</button>
+        <button (click)="onOperatorButtonClick('MU')" type="button" class="operator-MU function-button">MU</button>
+        <button (click)="onOperatorButtonClick('MC')" type="button" class="operator-MC function-button">MC</button>
+        <button (click)="onOperatorButtonClick('MR')" type="button" class="operator-MR function-button">MR</button>
+        <button (click)="onOperatorButtonClick('M-')" type="button" class="operator-MMinus function-button">M-</button>
+        <button (click)="onOperatorButtonClick('M+')" type="button" class="operator-MPlus function-button">M+</button>
+        <button (click)="onOperatorButtonClick('±')" type="button" class="operator-PorM function-button">±</button>
+        <button (click)="onOperatorButtonClick('delete')" type="button" class="operator-Delete function-button"
+            value="delete">→</button>
+        <button (click)="onOperatorButtonClick('plus')" type="button" class="operator-Plus function-button" value="+">+</button>
+        <button (click)="onOperatorButtonClick('minus')" type="button" class="operator-Minus function-button"
+            value="-">-</button>
+        <button (click)="onOperatorButtonClick('cross')" type="button" class="operator-Cross function-button">×</button>
+        <button (click)="onOperatorButtonClick('remove')" type="button" class="operator-Remove function-button">÷</button>
+        <button (click)="onOperatorButtonClick('decimal')" type="button"
+            class="operator-Decimal decimal function-button ">.</button>
+        <button (click)="onOperatorButtonClick('all-clear')" type="button"
+            class="operator-AC all-clear function-button ">AC</button>
+        <button (click)="onOperatorButtonClick('equal')" type="button"
+            class=" operator-Equal equal-sign function-button">=</button>
+
+        <button (click)="onNumberButtonClick('9')" type="button" class="number-button number-9" value="9">9</button>
+        <button (click)="onNumberButtonClick('8')" type="button" class="number-button number-8" value="8">8</button>
+        <button (click)="onNumberButtonClick('7')" type="button" class="number-button number-7" value="7">7</button>
+        <button (click)="onNumberButtonClick('6')" type="button" class="number-button number-6" value="6">6</button>
+        <button (click)="onNumberButtonClick('5')" type="button" class="number-button number-5" value="5">5</button>
+        <button (click)="onNumberButtonClick('4')" type="button" class="number-button number-4" value="4">4</button>
+        <button (click)="onNumberButtonClick('3')" type="button" class="number-button number-3" value="3">3</button>
+        <button (click)="onNumberButtonClick('2')" type="button" class="number-button number-2" value="2">2</button>
+        <button (click)="onNumberButtonClick('1')" type="button" class="number-button number-1" value="1">1</button>
+        <button (click)="onNumberButtonClick('0')" type="button" class="number-button number-0" value="0">0</button>
+        <button (click)="onNumberButtonClick('00')" type="button" class="number-button number-00" value="00">0 0</button>
+    </div>
+</div>
