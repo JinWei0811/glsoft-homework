@@ -19,16 +19,26 @@ export class CalculatorComponent implements OnInit {
 
 
     document.onkeydown = e => {
+      console.log(e);
       const number_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-      const operator_list = [ {key : '+'}, '-', '*', '/', 'Enter', 'Backspace']
+      const operator_list = [
+        { key: '+', operator: 'plus' },
+        { key: '-', operator: 'minus' },
+        { key: '*', operator: 'cross' },
+        { key: '/', operator: 'remove' },
+        { key: 'Enter', operator: 'equal' },
+        { key: 'Backspace', operator: 'delete' },
+        { key: 'Escape', operator: 'all-clear' },
+        { key: '.', operator: 'decimal' },
+      ]
 
       let number = number_list.filter(v => v == e.key);
-      let operator = number_list.filter(v => v == e.key);
+      let operator = operator_list.filter(v => v.key == e.key);
       if (number.length > 0) {
         this.onNumberButtonClick(number[0]);
       }
       if (operator.length > 0) {
-        this.onOperatorButtonClick(operator[0]);
+        this.onOperatorButtonClick(operator[0].operator);
       }
 
     }
@@ -94,7 +104,10 @@ export class CalculatorComponent implements OnInit {
         this.result = '0';
         break;
       case 'decimal':
-        this.result += '.';
+        console.log(String(this.result).indexOf('.'));
+        if (String(this.result).indexOf('.') == -1) {
+          this.result += '.';
+        }
         break;
       case 'all-clear':
         this.result = '0';
