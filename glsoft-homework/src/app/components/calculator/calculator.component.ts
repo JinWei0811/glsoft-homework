@@ -8,145 +8,142 @@ import { Component, OnInit } from '@angular/core';
 
 export class CalculatorComponent implements OnInit {
 
-  result: number = 0;
-  previous: number = 0;
-
-  operators_click = {
-    plus: false,
-    minus: false,
-    cross: false,
-    remove: false,
-  };
-
+  result: string = '0';
+  style: string = 'original'; // Default Style
+  memoryResult: number = 0;
+  memoryClick: boolean = false;
+  MRCClick: number = 0;
+  evalString = '';
 
   ngOnInit(): void {
+
+
+    document.onkeydown = e => {
+      const number_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      const operator_list = [ {key : '+'}, '-', '*', '/', 'Enter', 'Backspace']
+
+      let number = number_list.filter(v => v == e.key);
+      let operator = number_list.filter(v => v == e.key);
+      if (number.length > 0) {
+        this.onNumberButtonClick(number[0]);
+      }
+      if (operator.length > 0) {
+        this.onOperatorButtonClick(operator[0]);
+      }
+
+    }
+  }
+
+  onChangeStyleButtonClick() {
+    this.style = this.style === 'original' ? 'vintage' : 'original';
   }
 
   onOperatorButtonClick(value: string) {
     switch (value) {
       case '%':
-        this.result = this.result / 100;
+        this.result = eval(this.result + '/100');
         break;
       case 'MU':
+        let temp = eval(`${this.result}/100 + 1`);
+        this.memoryResult = eval(`${this.evalString}${temp}`)
+        this.evalString = '';
+        this.memoryClick = true;
         break;
       case 'MC':
+        this.memoryResult = 0;
         break;
       case 'MR':
+        this.result = this.memoryResult + '';
+        this.memoryClick = false;
         break;
       case 'M-':
+        this.memoryResult -= Number(this.result);
+        this.memoryClick = true;
         break;
       case 'M+':
+        this.memoryResult += Number(this.result);
+        this.memoryClick = true;
         break;
       case '±':
-        let temp = this.result;
-        if (this.result != 0) {
-          this.result = this.result - (temp * 2)
+        if (Number(this.result) != 0) {
+          let temp = this.result;
+          this.result = eval(`${this.result} - ${temp} * 2`)
         }
         break;
       case 'delete':
-        if (this.result >= 10) {
-          this.result = Math.floor(this.result / 10);
+        if (Number(this.result) >= 10) {
+          this.result = Math.floor(Number(eval(`${this.result} / 10`))) + '';
         } else {
-          this.result = 0;
+          this.result = '0';
         }
         break;
       case 'plus':
-        if (this.operators_click.plus) {
-          this.result = this.result + this.previous;
-          this.operators_click.plus = false;
-        } else {
-          this.previous = this.result;
-        }
+        this.evalString += this.result + '+'
+        this.result = '0';
         break;
       case 'minus':
+        this.evalString += this.result + '-'
+        this.result = '0';
         break;
       case 'cross':
+        this.evalString += this.result + '*'
+        this.result = '0';
         break;
       case 'remove':
+        this.evalString += this.result + '/'
+        this.result = '0';
         break;
       case 'decimal':
+        this.result += '.';
         break;
       case 'all-clear':
-        this.result = 0;
+        this.result = '0';
+        this.evalString = '';
         break;
       case 'equal':
+        this.evalString += this.result;
+        this.calculate();
+        this.evalString = '';
         break;
-      case '0':
-        if (this.result > 0) {
-          this.result = this.result * 10;
+      case 'ce':
+        this.result = '0';
+        break;
+      case 'root':
+        this.result = Math.sqrt(Number(this.result)) + '';
+        break;
+      case 'MRC':
+        console.log(this.MRCClick, this.memoryClick, this.result, this.memoryResult)
+        // MR
+        if (this.MRCClick == 0 && this.memoryClick) {
+          this.result = this.memoryResult + '';
+          this.memoryClick = false;
+          this.MRCClick++;
         }
-        break;
-      case '00':
-        if (this.result >= 1) {
-          this.result = this.result * 100;
-        }
-        break;
-      case '1':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 1;
-        } else {
-          this.result = 1;
-        }
-        break;
-      case '2':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 2;
-        } else {
-          this.result = 2;
-        }
-        break;
-      case '3':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 3;
-        } else {
-          this.result = 3;
-        }
-        break;
-      case '4':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 4;
-        } else {
-          this.result = 4;
-        }
-        break;
-      case '5':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 5;
-        } else {
-          this.result = 5;
-        }
-        break;
-      case '6':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 6;
-        } else {
-          this.result = 6;
-        }
-        break;
-      case '7':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 7;
-        } else {
-          this.result = 7;
-        }
-        break;
-      case '8':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 8;
-        } else {
-          this.result = 8;
-        }
-        break;
-      case '9':
-        if (this.result > 0) {
-          this.result = this.result * 10 + 9;
-        } else {
-          this.result = 9;
+        // MC
+        if (this.MRCClick == 1) {
+          this.memoryResult = 0;
+          this.MRCClick = 0;
         }
         break;
     }
   }
 
+  onNumberButtonClick(value: string) {
+    if (this.result.length > 18) {
+      return;
+    }
+    if (this.memoryClick) {
+      this.result = '0';
+      this.memoryClick = false;
+    }
+    this.result = this.result == '0' ? value : this.result + value;
+  }
+
+
+  calculate() {
+    // console.log(this.evalString);
+    this.result = eval(this.evalString);
+  }
 }
 
 

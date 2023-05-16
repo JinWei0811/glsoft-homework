@@ -1,103 +1,105 @@
 html {
     box-sizing: border-box;
+    background-color: white;
 }
 
-.calculator {
+
+/* Origin Calculator */
+
+.calculator-original {
     border: 1px solid #ccc;
     border-radius: 15px;
     position: absolute;
     top: 50%;
     left: 50%;
     width: 330px;
-    height: 450px;
+    /* height: 450px; */
     transform: translate(-50%, -50%);
+    align-items: center;
+
 }
 
-.calculator-top {
+.calculator-top-original {
     background-color: black;
     border-radius: 15px 15px 0px 0px;
-    padding-top: 35px;
+    padding-top: 45px;
     padding-bottom: 15px;
 }
 
-.calculator-screen {
+.calculator-screen-original {
     width: 95%;
     text-align: right;
     margin: auto;
     display: block;
-    font-size: 25px;
+    font-size: 28px;
 }
 
-.calculator-buttons {
-    background-color: #c2bebe;
+.calculator-buttons-original {
+    background-color: #BDBCC1;
     border-radius: 0px 0px 15px 15px;
     display: flex;
     flex-flow: column wrap;
-    /* flex-direction: column;
-    flex-wrap: wrap; */
-    justify-content: space-around;
-    height: 400px;
+    justify-content: space-between;
+    height: 26rem;
+    padding: 5px 0px 10px 5px;
+    /* padding-left: 5px;
+    padding-bottom: 10px;
+    padding-top: 5px; */
 }
 
-.block-span {
+.block-span-original {
     height: 60px;
     width: 60px;
     border: none;
     background-color: #c2bebe;
 }
 
-.function-button {
+.function-button-original {
     height: 60px;
     width: 60px;
     background-color: #585656;
     border-radius: 3px;
-    border: 1px solid #585656;
+    /* border: 1px solid #585656; */
     font-size: 15px;
     color: #ffffff;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
     text-shadow: 0 1px rgba(255, 255, 255, .4);
 }
 
-.number-button {
+.number-button-original {
     height: 60px;
     width: 60px;
     background-color: #282727;
     border-radius: 3px;
-    border: 1px solid #585656;
+    /* border: 1px solid #585656; */
     font-size: 15px;
     color: #ffffff;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
     text-shadow: 0 1px rgba(255, 255, 255, .4);
 }
 
-button:hover {
+.function-button-original:hover {
     background-color: #949292;
 }
 
-button {
+.number-button-original:hover {
+    background-color: #949292;
+}
+
+/* button {
+    color: #ffffff;
+} */
+
+
+
+.all-clear-original {
+    background-color: #df3238;
+    /* border-color: #b0353a; */
     color: #ffffff;
 }
 
-
-
-.all-clear {
-    background-color: #df3238;
-    border-color: #b0353a;
-    color: #fff;
-}
-
-.all-clear:hover {
+.all-clear-original:hover {
     background-color: #f17377;
-}
-
-.equal-sign {
-    background-color: #2e86c0;
-    border-color: #337cac;
-    color: #fff;
-}
-
-.equal-sign:hover {
-    background-color: #4e9ed4;
 }
 
 .block-1 {
@@ -108,110 +110,331 @@ button {
     order: 7;
 }
 
-.block-3 {
-    order: 13;
-}
-
-.operator-percent {
+.operator-percent-original {
     order: 19;
 }
 
-.operator-MU {
+.operator-MU-original {
     order: 25;
 }
 
-.operator-MC {
+.operator-MC-original {
     order: 2;
 }
 
-.operator-MR {
+.operator-MR-original {
     order: 8;
 }
 
-.operator-MMinus {
+.operator-MMinus-original {
     order: 14;
 }
 
-.operator-MPlus {
+.operator-MPlus-original {
     order: 20;
 }
 
-.operator-PorM {
-    order:3 ;
+.operator-Change-original {
+    order: 3;
 }
 
-.operator-Delete {
-    order:4 ;
+.operator-Delete-original {
+    order: 4;
 }
 
-.operator-Plus {
+.operator-Plus-original {
     height: 33%;
     order: 29;
 }
 
-.operator-Minus {
+.operator-Minus-original {
     order: 28;
 }
-.operator-Cross {
+
+.operator-Cross-original {
     order: 27;
 }
 
-.operator-Remove {
+.operator-Remove-original {
     order: 26;
 }
 
-.operator-Decimal {
+.operator-Decimal-original {
     order: 18;
 }
 
-.operator-AC {
+.operator-AC-original {
     order: 5;
 }
 
-.operator-Equal {
+.operator-Equal-original {
     order: 24;
 }
 
-.number-0 {
+.operator-Switch-original {
+    order: 13;
+}
+
+.operator-CE-original {
+    display: none;
+}
+
+.operator-Root-original {
+    display: none;
+}
+
+.operator-MRC-original {
+    display: none;
+}
+
+.number-0-original {
     order: 6;
 }
 
-.number-00 {
+.number-00-original {
     order: 12;
 }
 
-.number-1 {
+.number-1-original {
     order: 11;
 }
 
-.number-2 {
+.number-2-original {
     order: 17;
 }
 
-.number-3 {
+.number-3-original {
     order: 23;
 }
 
-.number-4 {
+.number-4-original {
     order: 10;
 }
 
-.number-5 {
+.number-5-original {
     order: 16;
 }
 
-.number-6 {
+.number-6-original {
     order: 22;
 }
 
-.number-7 {
+.number-7-original {
     order: 9;
 }
 
-.number-8 {
+.number-8-original {
     order: 15;
 }
 
-.number-9 {
+.number-9-original {
     order: 21;
+}
+
+
+/* Vintage Calculator */
+
+.calculator-vintage {
+    border: 3px solid #E6D2C0;
+    border-radius: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 330px;
+    transform: translate(-50%, -50%);
+}
+
+.calculator-top-vintage {
+    background-color: #DAC4AE;
+    border-radius: 20px 20px 0px 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.calculator-screen-vintage {
+    width: 95%;
+    text-align: right;
+    margin: auto;
+    display: block;
+    font-size: 30px;
+    border-radius: 8px;
+}
+
+.calculator-buttons-vintage {
+    background-color: #DAC4AE;
+    border-radius: 0px 0px 20px 20px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    height: 13rem;
+}
+
+.block-span-vintage {
+    display: none;
+}
+
+.function-button-vintage {
+    height: 45px;
+    width: 45px;
+    background-color: white;
+    border-radius: 25px;
+    font-size: 15px;
+    color: #9C9C9E;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
+    text-shadow: 0 1px rgba(255, 255, 255, .4);
+}
+
+.number-button-vintage {
+    height: 45px;
+    width: 45px;
+    background-color: white;
+    border-radius: 25px;
+    font-size: 15px;
+    color: #9C9C9E;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
+    text-shadow: 0 1px rgba(255, 255, 255, .4);
+}
+
+.all-clear-vintage {
+    background-color: #65443B;
+    color: #7D7770;
+}
+
+.all-clear-vintage:hover {
+    background-color: #8b5d50;
+}
+
+.function-button-vintage:hover {
+    background-color: #c5c3c3;
+}
+
+.number-button-vintage:hover {
+    background-color: #c5c3c3;
+}
+
+.operator-percent-vintage {
+    order: 21;
+}
+
+.operator-MU-vintage {
+    display: none;
+}
+
+.operator-MC-vintage {
+    display: none;
+}
+
+.operator-MR-vintage {
+    display: none;
+}
+
+.operator-MMinus-vintage {
+    order: 27;
+}
+
+.operator-MPlus-vintage {
+    order: 28;
+}
+
+.operator-Change-vintage {
+    order: 25;
+}
+
+.operator-Delete-vintage {
+    order: 2;
+}
+
+.operator-Plus-vintage {
+    order: 20;
+}
+
+.operator-Minus-vintage {
+    order: 19;
+}
+
+.operator-Cross-vintage {
+    order: 18;
+}
+
+.operator-Remove-vintage {
+    order: 17;
+}
+
+.operator-Decimal-vintage {
+    order: 16;
+}
+
+.operator-AC-vintage {
+    order: 4;
+}
+
+.operator-Equal-vintage {
+    order: 24;
+    height: 50%;
+}
+
+.operator-Switch-vintage {
+    order: 1;
+}
+
+.operator-CE-vintage {
+    order: 3;
+}
+
+.operator-Root-vintage {
+    order: 22;
+}
+
+.operator-MRC-vintage {
+    order: 26;
+}
+
+.number-0-vintage {
+    order: 8;
+}
+
+.number-00-vintage {
+    order: 12;
+}
+
+.number-1-vintage {
+    order: 7;
+}
+
+.number-2-vintage {
+    order: 11;
+}
+
+.number-3-vintage {
+    order: 15;
+}
+
+.number-4-vintage {
+    order: 6;
+}
+
+.number-5-vintage {
+    order: 10;
+}
+
+.number-6-vintage {
+    order: 14;
+}
+
+.number-7-vintage {
+    order: 5;
+}
+
+.number-8-vintage {
+    order: 9;
+}
+
+.number-9-vintage {
+    order: 13;
+}
+
+.change-style {
+    position: absolute;
+    top: 8%;
+    left: 50%;
 }
