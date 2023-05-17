@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-calculator',
@@ -19,7 +20,7 @@ export class CalculatorComponent implements OnInit {
 
 
     document.onkeydown = e => {
-      console.log(e);
+      e.preventDefault();
       const number_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
       const operator_list = [
         { key: '+', operator: 'plus' },
@@ -104,7 +105,6 @@ export class CalculatorComponent implements OnInit {
         this.result = '0';
         break;
       case 'decimal':
-        console.log(String(this.result).indexOf('.'));
         if (String(this.result).indexOf('.') == -1) {
           this.result += '.';
         }
@@ -125,7 +125,6 @@ export class CalculatorComponent implements OnInit {
         this.result = Math.sqrt(Number(this.result)) + '';
         break;
       case 'MRC':
-        console.log(this.MRCClick, this.memoryClick, this.result, this.memoryResult)
         // MR
         if (this.MRCClick == 0 && this.memoryClick) {
           this.result = this.memoryResult + '';
@@ -154,8 +153,13 @@ export class CalculatorComponent implements OnInit {
 
 
   calculate() {
-    // console.log(this.evalString);
-    this.result = eval(this.evalString);
+    const mathjs = math.create(math.all);
+    mathjs.config({
+      number: 'BigNumber',
+      precision: 14  // 設定所需的精度
+    });
+    const result = mathjs.evaluate(this.evalString, { precision: 14 });
+    this.result = mathjs.format(result, { notation: 'fixed' });
   }
 }
 
