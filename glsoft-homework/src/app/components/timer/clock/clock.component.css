@@ -1,0 +1,133 @@
+.clock-bg {
+    background-color: #232323;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+.title {
+    color: #818181;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 50px;
+    margin: 20px;
+}
+
+.close {
+    color: #CCCCCC;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 50px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.caret-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+.caret {
+    color: white;
+    font-size: 200px;
+    cursor: pointer;
+}
+
+.divider {
+    border-bottom: 5px solid white;
+    display: flex;
+    width: 90%;
+}
+
+.time-number {
+    width: 80%;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row;
+}
+
+.number-set {
+    color: white;
+    font-size: 100px;
+}
+
+.number-warning {
+    color: #FEFE00;
+    font-size: 100px;
+}
+
+.function-bar {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #740f0f;
+    font-size: 50px;
+    width: 200px;
+    height: 60px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.plus-5m{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #5e585b;
+    font-size: 50px;
+    width: 200px;
+    height: 60px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.plus-15s{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #5e585b;
+    font-size: 50px;
+    width: 200px;
+    height: 60px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.close:hover{
+    color: #999999;
+}
+
+.caret:hover{
+    color: #CCCCCC;
+}
+
+.reset:hover{
+    color: #A61B1B;
+}
+
+.plus-5m:hover{
+    color: #827E80;
+}
+
+.plus-15s:hover{
+    color: #827E80;
+}

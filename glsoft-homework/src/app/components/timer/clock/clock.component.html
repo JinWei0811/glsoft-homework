@@ -1,0 +1,28 @@
+<div class="clock-bg">
+    <span class="title">{{ data.content }}</span>
+    <span class="close" (click)="onCloseClick()"><i class="fa-solid fa-circle-xmark"></i></span>
+    <div class="caret-container">
+        <span class="caret" (click)="onPlusClick('hours')"><i class="fa-solid fa-caret-up"></i></span>
+        <span class="caret" (click)="onPlusClick('minutes')"><i class="fa-solid fa-caret-up"></i></span>
+        <span class="caret" (click)="onPlusClick('seconds')"><i class="fa-solid fa-caret-up"></i></span>
+    </div>
+    <div class="divider"></div>
+    <div class="time-number">
+        <span class="number-{{ type }}">{{ hours }}</span>
+        <span class="number-{{ type }}">:</span>
+        <span class="number-{{ type }}">{{ minutes }}</span>
+        <span class="number-{{ type }}">:</span>
+        <span class="number-{{ type }}">{{ seconds }}</span>
+    </div>
+    <div class="divider"></div>
+    <div class="caret-container">
+        <span class="caret" (click)="onMinusClick('hours')"><i class="fa-solid fa-caret-down"></i></span>
+        <span class="caret" (click)="onMinusClick('minutes')"><i class="fa-solid fa-caret-down"></i></span>
+        <span class="caret" (click)="onMinusClick('seconds')"><i class="fa-solid fa-caret-down"></i></span>
+    </div>
+    <div class="function-bar">
+        <span class="reset">00:00</span>
+        <span class="plus-5m">+ 05m</span>
+        <span class="plus-15s">+ 15s</span>
+    </div>
+</div>

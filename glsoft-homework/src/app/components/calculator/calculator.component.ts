@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as math from 'mathjs';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ClockComponent } from '../timer/clock/clock.component';
 
 @Component({
   selector: 'app-calculator',
@@ -15,6 +17,8 @@ export class CalculatorComponent implements OnInit {
   memoryClick: boolean = false;
   MRCClick: number = 0;
   evalString = '';
+
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
