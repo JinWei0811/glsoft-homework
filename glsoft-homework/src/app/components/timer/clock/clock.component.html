@@ -21,8 +21,8 @@
         <span class="caret" (click)="onMinusClick('seconds')"><i class="fa-solid fa-caret-down"></i></span>
     </div>
     <div class="function-bar">
-        <span class="reset">00:00</span>
-        <span class="plus-5m">+ 05m</span>
-        <span class="plus-15s">+ 15s</span>
+        <span class="reset" (click)="onResetClick()">00:00</span>
+        <span class="plus-5m" (click)="onPlusClick('5m')">+ 05m</span>
+        <span class="plus-15s" (click)="onPlusClick('15s')">+ 15s</span>
     </div>
 </div>
