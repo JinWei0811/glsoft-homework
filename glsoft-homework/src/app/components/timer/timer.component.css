@@ -8,6 +8,32 @@
     align-items: center;
 }
 
+.clock-container {
+    margin: 0px;
+    margin-top: 200px;
+    width: 80rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock-view {
+    height: 120px;
+    font-size: 200px;
+    color: #01D801;
+}
+
+.font-seconds {
+    /* height: 80px; */
+    font-size: 80px;
+    color: #7F7F7F;
+}
+
+.setting-container {
+    margin: 0px;
+}
+
 .timmer-container {
     margin-top: 100px;
     width: 80rem;
@@ -22,6 +48,11 @@
 .timmer {
     color: white;
     font-size: 150px;
+    cursor: pointer;
+}
+
+.timmer:hover {
+    background-color: #808080;
 }
 
 .warning-bar {
@@ -33,7 +64,7 @@
 }
 
 .warning-timer {
-    color: white;
+    color: #8B8910;
     border-radius: 10px;
     background-color: #2F2F2F;
     font-size: 100px;
@@ -43,6 +74,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.warning-timer:hover {
+    background-color: #808080;
 }
 
 .yellow-lock {
@@ -55,6 +91,11 @@
     height: 8rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+
+.yellow-lock:hover {
+    background-color: #808080;
 }
 
 .red-lock {
@@ -67,24 +108,79 @@
     height: 8rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+
+.red-lock:hover {
+    background-color: #808080;
 }
 
 .fa-lock {
     margin: auto
 }
 
-.timeline {
+.timeline-container {
+    flex-flow: column wrap;
+}
+
+.timeline-false {
     margin-top: 30px;
-    border-bottom: 15px solid #01D801;
     display: flex;
     width: 80rem;
 }
 
-.up-caret {
+.timeline-true {
+    margin-top: 160px;
+    display: flex;
     width: 80rem;
+}
+
+.timeline-segment {
+    flex-grow: 1;
+    height: 15px;
+}
+
+.segment1 {
+    background-color: #01D801;
+    flex: 1;
+}
+
+.segment2 {
+    background-color: #FEFE00;
+    flex: 0;
+}
+
+
+/* .timeline-true {
+    margin-top: 160px;
+    display: flex;
+    width: 80rem;
+    border-bottom: 15px solid #01D801;
+} */
+
+.caret-container {
+    width: 80rem;
+    display: flex;
+}
+
+.up-caret {
+    width: 80px;
     color: white;
     font-size: 80px;
+    position: relative;
+    animation-fill-mode: forwards;
 }
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(78rem);
+    }
+}
+
 
 .function-bar {
     width: 80rem;
@@ -93,32 +189,75 @@
     /* margin-top: 50px; */
 }
 
-.information {
+.information-false {
     color: #CCCCCC;
+    display: flex;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.information-true {
+    color: #1A1A1A;
     display: flex;
     font-size: 100px;
 }
 
-.setting {
+.information-false:hover {
+    color: #888888;
+}
+
+.setting-false {
     color: #CCCCCC;
     display: flex;
     font-size: 100px;
+    cursor: pointer;
+}
+
+.setting-true {
+    color: #1A1A1A;
+    display: flex;
+    font-size: 100px;
+}
+
+.setting-false:hover {
+    color: #888888;
 }
 
 .start {
     color: #CCCCCC;
     display: flex;
     font-size: 100px;
+    cursor: pointer;
+}
+
+.start:hover {
+    color: #888888;
 }
 
 .restart {
     color: #CCCCCC;
     display: flex;
     font-size: 100px;
+    cursor: pointer;
 }
 
-.share {
+.restart:hover {
+    color: #888888
+}
+
+.share-false {
     color: #CCCCCC;
     display: flex;
     font-size: 100px;
+    cursor: pointer;
+}
+
+.share-true {
+    color: #1A1A1A;
+    display: flex;
+    font-size: 100px;
+}
+
+.share-false:hover {
+    color: #888888
 }
