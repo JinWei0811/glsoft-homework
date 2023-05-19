@@ -239,7 +239,7 @@ export class TimerComponent implements OnInit {
           } else {
             let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
             let countTime = (60 * (60 * this.setHour + this.setMinute) + this.setSecond) - (60 * (60 * this.countHour + this.countMinute) + this.countSecond);
-            if (warningTime == countTime) {
+            if (warningTime == countTime && !this.isOverMode) {
               const clockTime = document.querySelector('.clock-view') as HTMLElement;
               clockTime.style.color = '#FEFE00';
             }
@@ -312,10 +312,9 @@ export class TimerComponent implements OnInit {
             return;
           }
         } else {
-
           let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
           let countTime = 60 * (60 * this.countHour + this.countMinute) + this.countSecond;
-          if (warningTime >= countTime) {
+          if (warningTime == countTime && !this.isOverMode) {
             const clockTime = document.querySelector('.clock-view') as HTMLElement;
             clockTime.style.color = '#FEFE00';
           }
