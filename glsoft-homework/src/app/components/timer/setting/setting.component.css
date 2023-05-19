@@ -1,0 +1,140 @@
+.setting-bg {
+    background-color: #232323;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+.title {
+    color: #818181;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 50px;
+    margin: 20px
+}
+
+.close {
+    color: #CCCCCC;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 50px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.setting-options {
+    display: flex;
+    flex-direction: row;
+}
+
+.setting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 30rem;
+    margin-top: 50px;
+}
+
+.setting-font {
+    color: white;
+    font-size: 50px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sound-option {
+    color: white;
+    font-size: 50px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.sound-option:hover {
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 50px;
+    justify-content: center;
+    font-size: 50px;
+    margin: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 42px;
+    width: 42px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(39px);
+}
+
+.caret-up {
+    font-size: 75px;
+    line-height: 1;
+    color: #01D801;
+    height: 75px;
+    margin-left: 20px;
+}
+
+.caret-up:hover {
+    cursor: pointer;
+}
+
+.caret-down {
+    font-size: 75px;
+    line-height: 1;
+    color: #FF7F00;
+    height: 75px;
+    margin-left: 20px;
+}
+
+.caret-down:hover {
+    cursor: pointer;
+}

@@ -11,16 +11,16 @@
             <span class="red-lock"><i class="fa-solid fa-lock"></i></span>
         </div>
     </div>
-    <div class="timeline-{{ viewClock }}">
+    <div *ngIf="showTimeLine" class="timeline-{{ viewClock }}">
         <div class="timeline-segment segment1"></div>
         <div class="timeline-segment segment2"></div>
     </div>
-    <div class="caret-container">
+    <div *ngIf="showTimeLine" class="caret-container">
         <div class="up-caret"><i class="fa-solid fa-caret-up"></i></div>
     </div>
     <div class="function-bar">
         <span class="information-{{ showSetting }}"><i class="fa-solid fa-circle-info"></i> </span>
-        <span class="setting-{{ showSetting }}" disabled><i class="fa-solid fa-gear"></i></span>
+        <span class="setting-{{ showSetting }}" (click)="onSettingClick()"><i class="fa-solid fa-gear"></i></span>
         <span *ngIf="!isStart" class="start" (click)="onStartClick()"><i class="fa-solid fa-play"></i></span>
         <span *ngIf="isStart" class="start" (click)="onPauseClick()"><i class="fa-solid fa-pause"></i></span>
         <span class="restart" (click)="onResetClick()"><i class="fa-solid fa-rotate-right"></i></span>

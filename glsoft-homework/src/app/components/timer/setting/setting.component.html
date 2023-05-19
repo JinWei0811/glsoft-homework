@@ -1,1 +1,29 @@
-<p>setting works!</p>
+<div class="setting-bg">
+    <span class="title">options</span>
+    <span class="close" (click)="onCloseClick()"><i class="fa-solid fa-circle-xmark"></i></span>
+    <div class="setting-options">
+        <div class="setting-container ">
+            <span class="setting-font">sound</span>
+            <span class="setting-font">timeline</span>
+            <span class="setting-font">overtime</span>
+            <span class="setting-font">count mode</span>
+            <span class="setting-font">time format</span>
+        </div>
+        <div class="setting-container ">
+            <span class="sound-option" (click)="onSoundClick()">{{ sound }}</span>
+            <label class="switch">
+                <input type="checkbox" [(ngModel)]="timeline">
+                <span class="slider"></span>
+            </label>
+            <label class="switch">
+                <input type="checkbox" [(ngModel)]="overtime">
+                <span class="slider"></span>
+            </label>
+            <span *ngIf="countmode==='up'" class="caret-{{ countmode }}" (click)="onCountModeClick()"><i
+                    class="fa-solid fa-caret-up"></i></span>
+            <span *ngIf="countmode==='down'" class="caret-{{ countmode }}" (click)="onCountModeClick()"><i
+                    class="fa-solid fa-caret-down"></i></span>
+            <span class="sound-option" (click)="onTimeFormatClick()">{{ timeformat }}</span>
+        </div>
+    </div>
+</div>

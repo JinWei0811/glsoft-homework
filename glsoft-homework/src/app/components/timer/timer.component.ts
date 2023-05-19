@@ -11,7 +11,7 @@ import { SettingComponent } from './setting/setting.component';
   styleUrls: ['./timer.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TimerComponent implements OnInit, AfterViewInit {
+export class TimerComponent implements OnInit {
 
 
   dialogConfig = {} as MatDialogConfig;
@@ -32,24 +32,33 @@ export class TimerComponent implements OnInit, AfterViewInit {
   isStart: boolean = false;
   isPause: boolean = false;
   isEnd: boolean = false;
+  isOverMode: boolean = false;
   viewClock: boolean = false;
   showSetting: boolean = false;
+  showTimeLine: boolean = true;
+
+  // default Setting
+  setting = {
+    sound: 'enabled',
+    timeline: true,
+    overtime: false,
+    countmode: 'down',
+    timeformat: 'minutes'
+  } as {
+    sound: string,
+    timeline: boolean,
+    overtime: boolean,
+    countmode: string,
+    timeformat: string,
+  };
 
   timer: any;
-
   caretElement: any;
   timeLineElement: any;
 
 
+
   constructor(private dialog: MatDialog) { }
-  ngAfterViewInit(): void {
-    this.caretElement = document.querySelector('.up-caret') as HTMLElement;
-    this.timeLineElement = document.querySelector('.timeline') as HTMLElement;
-
-    // this.timeLineFalseElement.style.borderImage = 'linear-gradient(to right, #01D801 0%, #01D801 33%, #FF0000 33%, #FF0000 66%, #0000FF 66%, #0000FF 100%)';
-    // this.timeLineTrueElement.style.borderImage = 'linear-gradient(to right, #01D801 0%, #01D801 33%, #FF0000 33%, #FF0000 66%, #0000FF 66%, #0000FF 100%)';
-
-  }
 
   ngOnInit(): void {
     // initConfig
@@ -89,7 +98,8 @@ export class TimerComponent implements OnInit, AfterViewInit {
         this.warningHour = Number(result.hours);
         this.warningMinute = Number(result.minutes);
         this.warningSecond = Number(result.seconds);
-
+      }
+      if (this.setting.timeline) {
         let setTime = 60 * (60 * this.setHour + this.setMinute) + this.setSecond;
         let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
         const segment1 = document.querySelector('.segment1') as HTMLElement;
@@ -98,6 +108,40 @@ export class TimerComponent implements OnInit, AfterViewInit {
         segment2.style.flex = `${warningTime / setTime > 1 ? 1 : warningTime / setTime}`
       }
       this.generateTimeString(content);
+    })
+  }
+
+  onSettingClick() {
+    this.dialogConfig.data = {
+      setting: {
+        sound: this.setting.sound,
+        timeline: this.setting.timeline,
+        overtime: this.setting.overtime,
+        countmode: this.setting.countmode,
+        timeformat: this.setting.timeformat,
+      }
+    };
+    const dialogRef = this.dialog.open(SettingComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      this.setting = {
+        sound: result.sound,
+        timeline: result.timeline,
+        overtime: result.overtime,
+        countmode: result.countmode,
+        timeformat: result.timeformat
+      }
+
+      this.showTimeLine = this.setting.timeline;
+      if (this.setting.timeline) {
+        setTimeout(() => {
+          let setTime = 60 * (60 * this.setHour + this.setMinute) + this.setSecond;
+          let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
+          const segment1 = document.querySelector('.segment1') as HTMLElement;
+          const segment2 = document.querySelector('.segment2') as HTMLElement;
+          segment1.style.flex = `${1 - (warningTime / setTime) < 0 ? 0 : 1 - (warningTime / setTime)}`
+          segment2.style.flex = `${warningTime / setTime > 1 ? 1 : warningTime / setTime}`
+        }, 100);
+      }
     })
   }
 
@@ -111,14 +155,9 @@ export class TimerComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    if (!this.isPause) {
-      this.countHour = this.setHour;
-      this.countMinute = this.setMinute;
-      this.countSecond = this.setSecond;
-      let totalTime = (60 * (60 * this.countHour + this.countMinute) + this.countSecond) * 1000;
-      this.caretElement.style.animation = `moveRight ${totalTime}ms linear forwards`;
-    } else {
-      this.caretElement.style.animationPlayState = 'running';
+    if (this.setting.timeline || this.setting.timeline == undefined) {
+      this.caretElement = document.querySelector('.up-caret') as HTMLElement;
+      this.timeLineElement = document.querySelector('.timeline') as HTMLElement;
     }
 
     if (this.isEnd) {
@@ -130,72 +169,186 @@ export class TimerComponent implements OnInit, AfterViewInit {
       this.isEnd = false;
     }
 
+    if (!this.isPause) {
+      if (this.setting.countmode === 'down') {
+        this.countHour = this.setHour;
+        this.countMinute = this.setMinute;
+        this.countSecond = this.setSecond;
+        if (this.setting.timeline) {
+          let totalTime = (60 * (60 * this.countHour + this.countMinute) + this.countSecond) * 1000;
+          this.caretElement.style.animation = `moveRight ${totalTime}ms linear forwards`;
+        }
+      }
+      if (this.setting.countmode === 'up') {
+        this.countHour = 0;
+        this.countMinute = 0;
+        this.countSecond = 0;
+        if (this.setting.timeline) {
+          let totalTime = (60 * (60 * this.setHour + this.setMinute) + this.setSecond) * 1000;
+          this.caretElement.style.animation = `moveRight ${totalTime}ms linear forwards`;
+        }
+      }
+    } else {
+      this.caretElement.style.animationPlayState = 'running';
+    }
+
+
+
     this.isStart = true;
     this.viewClock = true;
     this.showSetting = true;
     this.isPause = false;
-    this.generateTimeString('count time');
-    let i = 0;
-    this.countMSecond = 900;
-    this.timer = setInterval(() => {
-      if (this.countMSecond > 0) {
-        this.countMSecond -= 100;
-      } else {
-        if (this.countSecond > 0) {
-          this.countSecond--;
-          this.countMSecond = 900;
-        } else {
-          if (this.countMinute > 0) {
-            this.countMinute--;
-            this.countSecond = 59;
-            this.countMSecond = 900;
+    if (this.setting.countmode === 'up') {
+      this.generateTimeString('count time');
+      this.countMSecond = 0,
+        this.timer = setInterval(() => {
+          this.countMSecond += 100;
+          if (this.countMSecond >= 1000) {
+            this.countMSecond = 0;
+            this.countSecond++;
+            if (this.countSecond >= 60) {
+              this.countSecond = 0;
+              this.countMinute++;
+              if (this.countMinute >= 60) {
+                this.countMinute = 0;
+                this.countHour++;
+              }
+            }
+          }
+
+          this.generateTimeString('count time');
+          if (this.countHour == this.setHour && this.countMinute == this.setMinute && this.countSecond == this.setSecond) {
+            if (this.setting.overtime) {
+              if (!this.isOverMode) {
+                const clockTime = document.querySelector('.clock-view') as HTMLElement;
+                clockTime.style.color = '#FE00FE';
+                this.countHour = 0;
+                this.countMinute = 0;
+                this.countSecond = 0;
+                this.isOverMode = true;
+              }
+            } else {
+              this.isStart = false;
+              this.isEnd = true;
+              this.showSetting = false;
+              const clockTime = document.querySelector('.clock-view') as HTMLElement;
+              clockTime.style.color = 'white';
+              clearInterval(this.timer);
+              return;
+            }
           } else {
-            if (this.countHour > 0) {
-              this.countHour--;
-              this.countMinute = 59;
-              this.countSecond = 59;
-              this.countMSecond = 900;
+            let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
+            let countTime = (60 * (60 * this.setHour + this.setMinute) + this.setSecond) - (60 * (60 * this.countHour + this.countMinute) + this.countSecond);
+            if (warningTime == countTime) {
+              const clockTime = document.querySelector('.clock-view') as HTMLElement;
+              clockTime.style.color = '#FEFE00';
+            }
+          }
+
+        }, 100)
+    }
+    if (this.setting.countmode === 'down') {
+      this.generateTimeString('count time');
+      this.countMSecond = 900;
+      this.timer = setInterval(() => {
+        if (this.isOverMode) {
+          this.countMSecond += 100;
+          if (this.countMSecond >= 1000) {
+            this.countMSecond = 0;
+            this.countSecond++;
+            if (this.countSecond >= 60) {
+              this.countSecond = 0;
+              this.countMinute++;
+              if (this.countMinute >= 60) {
+                this.countMinute = 0;
+                this.countHour++;
+              }
             }
           }
         }
-      }
-      this.generateTimeString('count time');
-      console.log(this.countSecond, this.countMSecond);
-      if (this.countHour == 0 && this.countMinute == 0 && this.countSecond == 0 ) {
-        this.isStart = false;
-        this.isEnd = true;
-        this.showSetting = false;
-        const clockTime = document.querySelector('.clock-view') as HTMLElement;
-        clockTime.style.color = 'white';
-        clearInterval(this.timer);
-        return;
-      }
 
-      let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
-      let countTime = 60 * (60 * this.countHour + this.countMinute) + this.countSecond;
-      if (warningTime > countTime) {
-        const clockTime = document.querySelector('.clock-view') as HTMLElement;
-        clockTime.style.color = '#FEFE00';
-      }
+        if (!this.isOverMode) {
+          if (this.countMSecond > 0) {
+            this.countMSecond -= 100;
+          } else {
+            if (this.countSecond > 0) {
+              this.countSecond--;
+              this.countMSecond = 900;
+            } else {
+              if (this.countMinute > 0) {
+                this.countMinute--;
+                this.countSecond = 59;
+                this.countMSecond = 900;
+              } else {
+                if (this.countHour > 0) {
+                  this.countHour--;
+                  this.countMinute = 59;
+                  this.countSecond = 59;
+                  this.countMSecond = 900;
+                }
+              }
+            }
+          }
+        }
 
-    }, 100)
+        this.generateTimeString('count time');
+        if (this.countHour == 0 && this.countMinute == 0 && this.countSecond == 0) {
+          if (this.setting.overtime) {
+            if (!this.isOverMode) {
+              const clockTime = document.querySelector('.clock-view') as HTMLElement;
+              clockTime.style.color = '#FE00FE';
+              this.countHour = 0;
+              this.countMinute = 0;
+              this.countSecond = 0;
+              this.isOverMode = true;
+            }
+          } else {
+            this.isStart = false;
+            this.isEnd = true;
+            this.showSetting = false;
+            const clockTime = document.querySelector('.clock-view') as HTMLElement;
+            clockTime.style.color = 'white';
+            clearInterval(this.timer);
+            return;
+          }
+        } else {
+
+          let warningTime = 60 * (60 * this.warningHour + this.warningMinute) + this.warningSecond;
+          let countTime = 60 * (60 * this.countHour + this.countMinute) + this.countSecond;
+          if (warningTime >= countTime) {
+            const clockTime = document.querySelector('.clock-view') as HTMLElement;
+            clockTime.style.color = '#FEFE00';
+          }
+        }
+      }, 100)
+    }
   }
 
   onPauseClick() {
     if (this.isStart) {
+      if (this.setting.timeline) {
+        this.caretElement = document.querySelector('.up-caret') as HTMLElement;
+        this.caretElement.style.animationPlayState = 'paused';
+      }
       this.isStart = false;
       this.isPause = true;
-      this.caretElement.style.animationPlayState = 'paused';
+      this.showSetting = false;
       clearInterval(this.timer)
     }
   }
 
   onResetClick() {
-    this.caretElement.style.animation = 'none';
-    this.caretElement.offsetHeight; // 強制重繪
-    this.caretElement.style.animation = null;
+    if (this.setting.timeline) {
+      this.caretElement = document.querySelector('.up-caret') as HTMLElement;
+      this.caretElement.style.animation = 'none';
+      this.caretElement.offsetHeight; // 強制重繪
+      this.caretElement.style.animation = null;
+    }
     this.viewClock = false;
     this.isStart = false;
+    this.isPause = false;
+    this.isEnd = true;
+    this.isOverMode = false;
     this.showSetting = false;
     clearInterval(this.timer);
   }
@@ -219,6 +372,6 @@ export class TimerComponent implements OnInit, AfterViewInit {
   }
 
   additionZero(value: number) {
-    return value >= 10 ? '' + value : `0${value}`;
+    return value >= 10 ? '' + value : `0${value} `;
   }
 }
