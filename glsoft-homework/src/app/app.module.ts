@@ -10,7 +10,7 @@ import { InformationComponent } from './components/timer/information/information
 import { SettingComponent } from './components/timer/setting/setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { WebsocketComponent } from './components/websocket/websocket.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     TimerComponent,
     ClockComponent,
     InformationComponent,
-    SettingComponent
+    SettingComponent,
+    WebsocketComponent
   ],
   imports: [
     BrowserModule,
